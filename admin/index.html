@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>لوحة تحكم مدار العقارية</title>
+<link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body class="admin-body">
+<div id="loginView" class="login-wrap">
+  <form id="loginForm" class="login-card">
+    <div class="brand"><span class="brand-mark">M</span><span>مدار العقارية <b>| MIDAR</b></span></div>
+    <h1>لوحة التحكم</h1>
+    <p style="color:#667085">إدارة العقارات والعملاء من مكان واحد.</p>
+    <input id="email" type="email" placeholder="البريد الإلكتروني" required>
+    <input id="password" type="password" placeholder="كلمة المرور" required>
+    <button class="btn btn-primary" type="submit">تسجيل الدخول</button>
+    <div id="loginMsg" class="setup-note">بعد تنفيذ ملف SQL وربط Supabase، أنشئ مستخدمًا من Supabase Auth ثم ادخل من هنا.</div>
+  </form>
+</div>
+
+<div id="adminView" class="admin-shell" style="display:none">
+  <aside class="sidebar">
+    <a class="brand" href="/"><span class="brand-mark">M</span><span>مدار <b>| MIDAR</b></span></a>
+    <div class="sidebar-menu">
+      <button class="active" data-tab="dashboard">لوحة المتابعة</button>
+      <button data-tab="properties">العقارات</button>
+      <button data-tab="leads">العملاء والاستفسارات</button>
+      <button data-tab="settings">الإعدادات</button>
+    </div>
+    <button id="logoutBtn" class="btn btn-ghost" style="margin-top:28px;width:100%">تسجيل الخروج</button>
+  </aside>
+
+  <main class="admin-main">
+    <div class="admin-top"><div><span class="eyebrow">MIDAR CONTROL CENTER</span><h1>لوحة تحكم مدار</h1></div><button id="addPropertyBtn" class="btn btn-gold">+ إضافة عقار</button></div>
+
+    <section id="tab-dashboard" class="tab">
+      <div class="kpis">
+        <div class="kpi"><small>العقارات المنشورة</small><b id="kpiPublished">0</b></div>
+        <div class="kpi"><small>المسودات</small><b id="kpiDrafts">0</b></div>
+        <div class="kpi"><small>العملاء الجدد</small><b id="kpiLeads">0</b></div>
+        <div class="kpi"><small>الشاليهات</small><b id="kpiChalets">0</b></div>
+      </div>
+      <div class="panel"><div class="panel-head"><h2>أحدث العقارات</h2></div><div id="recentProperties"></div></div>
+    </section>
+
+    <section id="tab-properties" class="tab" style="display:none">
+      <div class="panel"><div class="panel-head"><h2>إدارة العقارات</h2><button id="addPropertyBtn2" class="btn btn-primary">+ إضافة عقار</button></div><div style="overflow:auto"><table><thead><tr><th>المرجع</th><th>العقار</th><th>النوع</th><th>السعر</th><th>الحالة</th><th>إجراء</th></tr></thead><tbody id="propertyRows"></tbody></table></div></div>
+    </section>
+
+    <section id="tab-leads" class="tab" style="display:none">
+      <div class="panel"><div class="panel-head"><h2>العملاء والاستفسارات</h2></div><div style="overflow:auto"><table><thead><tr><th>الاسم</th><th>الجوال</th><th>النوع</th><th>الرسالة</th><th>التاريخ</th></tr></thead><tbody id="leadRows"></tbody></table></div></div>
+    </section>
+
+    <section id="tab-settings" class="tab" style="display:none">
+      <div class="panel"><h2>الإعدادات</h2><p>الموقع: <b>midarrealty.com</b></p><p>رقم واتساب: <b>0596598878</b></p><p>التصنيفات: أرض، فيلا، شاليه، استثماري، تجاري.</p></div>
+    </section>
+  </main>
+</div>
+
+<div id="propertyModal" class="modal">
+  <form id="propertyForm" class="modal-card">
+    <div class="modal-head"><h2 id="modalTitle">إضافة عقار</h2><button type="button" id="closeModal" class="btn">✕</button></div>
+    <input type="hidden" id="propertyId">
+    <div class="form-grid">
+      <label>نوع العقار<select id="pType" required><option value="land">أرض</option><option value="villa">فيلا</option><option value="chalet">شاليه</option><option value="investment">استثماري</option><option value="commercial">تجاري</option></select></label>
+      <label>الحالة<select id="pStatus"><option value="published">منشور</option><option value="draft">مسودة</option><option value="archived">مؤرشف</option></select></label>
+      <label class="full">عنوان العرض<input id="pTitle" required placeholder="مثال: فيلا فاخرة – حي الرحاب، بريدة"></label>
+      <label>المدينة<input id="pCity" value="بريدة"></label>
+      <label>الحي<input id="pDistrict"></label>
+      <label>المساحة م²<input id="pArea" type="number"></label>
+      <label>السعر ريال<input id="pPrice" type="number" required></label>
+      <label>الشارع<input id="pStreet" placeholder="مثال: جنوبي 25 م"></label>
+      <label>رابط Google Maps<input id="pMap"></label>
+      <label class="full">الوصف<textarea id="pDescription"></textarea></label>
+      <label class="full">صور العقار<input id="pImages" type="file" accept="image/*" multiple></label>
+      <label><input id="pFeatured" type="checkbox"> عرض مميز</label>
+    </div>
+    <div class="modal-actions"><button type="button" id="cancelModal" class="btn">إلغاء</button><button class="btn btn-primary" type="submit">حفظ العقار</button></div>
+    <small id="formStatus"></small>
+  </form>
+</div>
+<script type="module" src="/admin/admin.js"></script>
+</body>
+</html>
