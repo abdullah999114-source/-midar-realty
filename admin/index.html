@@ -4,17 +4,18 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>لوحة تحكم مدار العقارية</title>
 <link rel="stylesheet" href="/assets/styles.css">
+<link rel="stylesheet" href="/admin/v2.css">
 </head>
 <body class="admin-body">
 <div id="loginView" class="login-wrap">
   <form id="loginForm" class="login-card">
     <div class="brand"><span class="brand-mark">M</span><span>مدار العقارية <b>| MIDAR</b></span></div>
     <h1>لوحة التحكم</h1>
-    <p style="color:#667085">إدارة العقارات والعملاء من مكان واحد.</p>
+    <p class="muted">إدارة العروض والعملاء من مكان واحد.</p>
     <input id="email" type="email" placeholder="البريد الإلكتروني" required>
     <input id="password" type="password" placeholder="كلمة المرور" required>
     <button class="btn btn-primary" type="submit">تسجيل الدخول</button>
-    <div id="loginMsg" class="setup-note">بعد تنفيذ ملف SQL وربط Supabase، أنشئ مستخدمًا من Supabase Auth ثم ادخل من هنا.</div>
+    <div id="loginMsg" class="login-msg"></div>
   </form>
 </div>
 
@@ -23,28 +24,44 @@
     <a class="brand" href="/"><span class="brand-mark">M</span><span>مدار <b>| MIDAR</b></span></a>
     <div class="sidebar-menu">
       <button class="active" data-tab="dashboard">لوحة المتابعة</button>
-      <button data-tab="properties">العقارات</button>
+      <button data-tab="properties">العقارات والعروض</button>
       <button data-tab="leads">العملاء والاستفسارات</button>
       <button data-tab="settings">الإعدادات</button>
     </div>
-    <button id="logoutBtn" class="btn btn-ghost" style="margin-top:28px;width:100%">تسجيل الخروج</button>
+    <button id="logoutBtn" class="btn btn-ghost logout-btn">تسجيل الخروج</button>
   </aside>
 
   <main class="admin-main">
-    <div class="admin-top"><div><span class="eyebrow">MIDAR CONTROL CENTER</span><h1>لوحة تحكم مدار</h1></div><button id="addPropertyBtn" class="btn btn-gold">+ إضافة عقار</button></div>
+    <div class="admin-top">
+      <div><span class="eyebrow">MIDAR CONTROL CENTER V2</span><h1>لوحة تحكم مدار</h1><p class="muted admin-sub">إدارة أسرع للعروض والصفقات والعملاء</p></div>
+      <button id="addPropertyBtn" class="btn btn-gold">+ إضافة عرض جديد</button>
+    </div>
 
     <section id="tab-dashboard" class="tab">
       <div class="kpis">
-        <div class="kpi"><small>العقارات المنشورة</small><b id="kpiPublished">0</b></div>
+        <div class="kpi"><small>العروض المنشورة</small><b id="kpiPublished">0</b></div>
         <div class="kpi"><small>المسودات</small><b id="kpiDrafts">0</b></div>
         <div class="kpi"><small>العملاء الجدد</small><b id="kpiLeads">0</b></div>
-        <div class="kpi"><small>الشاليهات</small><b id="kpiChalets">0</b></div>
+        <div class="kpi"><small>العروض المتاحة</small><b id="kpiAvailable">0</b></div>
       </div>
-      <div class="panel"><div class="panel-head"><h2>أحدث العقارات</h2></div><div id="recentProperties"></div></div>
+      <div class="quick-grid">
+        <button class="quick-card" id="quickAdd"><b>إضافة عرض</b><span>أدخل العرض وانشره خلال دقائق</span></button>
+        <button class="quick-card" data-go="properties"><b>إدارة العروض</b><span>تعديل، أرشفة، متابعة الحالة</span></button>
+        <button class="quick-card" data-go="leads"><b>العملاء</b><span>متابعة الاستفسارات الجديدة</span></button>
+      </div>
+      <div class="panel"><div class="panel-head"><h2>أحدث العروض</h2></div><div id="recentProperties"></div></div>
     </section>
 
     <section id="tab-properties" class="tab" style="display:none">
-      <div class="panel"><div class="panel-head"><h2>إدارة العقارات</h2><button id="addPropertyBtn2" class="btn btn-primary">+ إضافة عقار</button></div><div style="overflow:auto"><table><thead><tr><th>المرجع</th><th>العقار</th><th>النوع</th><th>السعر</th><th>الحالة</th><th>إجراء</th></tr></thead><tbody id="propertyRows"></tbody></table></div></div>
+      <div class="panel">
+        <div class="panel-head panel-head-wrap"><div><h2>إدارة العقارات والعروض</h2><p class="muted tiny">كل عروض مدار في مكان واحد</p></div><button id="addPropertyBtn2" class="btn btn-primary">+ إضافة عرض</button></div>
+        <div class="admin-filters">
+          <input id="propertySearch" placeholder="ابحث بالمرجع، العنوان، الحي...">
+          <select id="filterType"><option value="">كل الأنواع</option><option value="land">أرض</option><option value="villa">فيلا</option><option value="chalet">شاليه</option><option value="investment">استثماري</option><option value="commercial">تجاري</option></select>
+          <select id="filterDeal"><option value="">كل حالات الصفقة</option><option value="available">متاح</option><option value="reserved">محجوز</option><option value="sold">تم البيع</option><option value="rented">تم التأجير</option><option value="inactive">غير نشط</option></select>
+        </div>
+        <div style="overflow:auto"><table><thead><tr><th>المرجع</th><th>العرض</th><th>النوع</th><th>السعر</th><th>النشر</th><th>الصفقة</th><th>إجراء</th></tr></thead><tbody id="propertyRows"></tbody></table></div>
+      </div>
     </section>
 
     <section id="tab-leads" class="tab" style="display:none">
@@ -52,31 +69,73 @@
     </section>
 
     <section id="tab-settings" class="tab" style="display:none">
-      <div class="panel"><h2>الإعدادات</h2><p>الموقع: <b>midarrealty.com</b></p><p>رقم واتساب: <b>0596598878</b></p><p>التصنيفات: أرض، فيلا، شاليه، استثماري، تجاري.</p></div>
+      <div class="panel settings-grid"><div><h2>إعدادات مدار</h2><p>الموقع: <b>midarrealty.com</b></p><p>واتساب: <b>0596598878</b></p></div><div class="privacy-note"><b>خصوصية المالك</b><p>بيانات المالك والملاحظات الداخلية محفوظة في جدول خاص لا يظهر لزوار الموقع.</p></div></div>
     </section>
   </main>
 </div>
 
 <div id="propertyModal" class="modal">
-  <form id="propertyForm" class="modal-card">
-    <div class="modal-head"><h2 id="modalTitle">إضافة عقار</h2><button type="button" id="closeModal" class="btn">✕</button></div>
+  <form id="propertyForm" class="modal-card modal-card-v2">
+    <div class="modal-head"><div><span class="eyebrow">MIDAR PROPERTY</span><h2 id="modalTitle">إضافة عرض عقاري</h2></div><button type="button" id="closeModal" class="icon-close">✕</button></div>
     <input type="hidden" id="propertyId">
-    <div class="form-grid">
-      <label>نوع العقار<select id="pType" required><option value="land">أرض</option><option value="villa">فيلا</option><option value="chalet">شاليه</option><option value="investment">استثماري</option><option value="commercial">تجاري</option></select></label>
-      <label>الحالة<select id="pStatus"><option value="published">منشور</option><option value="draft">مسودة</option><option value="archived">مؤرشف</option></select></label>
-      <label class="full">عنوان العرض<input id="pTitle" required placeholder="مثال: فيلا فاخرة – حي الرحاب، بريدة"></label>
-      <label>المدينة<input id="pCity" value="بريدة"></label>
-      <label>الحي<input id="pDistrict"></label>
-      <label>المساحة م²<input id="pArea" type="number"></label>
-      <label>السعر ريال<input id="pPrice" type="number" required></label>
-      <label>الشارع<input id="pStreet" placeholder="مثال: جنوبي 25 م"></label>
-      <label>رابط Google Maps<input id="pMap"></label>
-      <label class="full">الوصف<textarea id="pDescription"></textarea></label>
-      <label class="full">صور العقار<input id="pImages" type="file" accept="image/*" multiple></label>
-      <label><input id="pFeatured" type="checkbox"> عرض مميز</label>
+
+    <div class="form-section">
+      <div class="form-section-title"><b>1. معلومات العرض</b><span>البيانات الأساسية التي تظهر في الموقع</span></div>
+      <div class="form-grid">
+        <label>نوع العقار<select id="pType" required><option value="land">أرض</option><option value="villa">فيلا</option><option value="chalet">شاليه</option><option value="investment">استثماري</option><option value="commercial">تجاري</option></select></label>
+        <label>نوع العرض<select id="pOfferType"><option value="sale">بيع</option><option value="rent">إيجار</option></select></label>
+        <label>حالة النشر<select id="pStatus"><option value="published">منشور</option><option value="draft">مسودة</option><option value="archived">مؤرشف</option></select></label>
+        <label>حالة الصفقة<select id="pDealStatus"><option value="available">متاح</option><option value="reserved">محجوز</option><option value="sold">تم البيع</option><option value="rented">تم التأجير</option><option value="inactive">غير نشط</option></select></label>
+        <label class="full">عنوان العرض<input id="pTitle" required placeholder="مثال: فيلا فاخرة – حي الرحاب، بريدة"></label>
+        <label>المدينة<input id="pCity" value="بريدة"></label>
+        <label>الحي<input id="pDistrict"></label>
+        <label>المساحة م²<input id="pArea" type="number" min="0" step="0.01"></label>
+        <label>السعر ريال<input id="pPrice" type="number" min="0" required></label>
+        <label>الواجهة<input id="pFrontage" placeholder="مثال: جنوبي"></label>
+        <label>عرض الشارع م<input id="pStreetWidth" type="number" min="0" step="0.1"></label>
+        <label class="full">وصف مختصر<input id="pShortDescription" maxlength="180" placeholder="سطر تسويقي مختصر يظهر في البطاقة"></label>
+        <label class="full">رابط Google Maps<input id="pMap" placeholder="https://maps.app.goo.gl/..."></label>
+      </div>
     </div>
-    <div class="modal-actions"><button type="button" id="cancelModal" class="btn">إلغاء</button><button class="btn btn-primary" type="submit">حفظ العقار</button></div>
-    <small id="formStatus"></small>
+
+    <div id="buildingFields" class="form-section">
+      <div class="form-section-title"><b>2. تفاصيل المبنى</b><span>تظهر للفلل والشاليهات والعقارات المبنية</span></div>
+      <div class="form-grid compact-grid">
+        <label>غرف النوم<input id="pBedrooms" type="number" min="0"></label>
+        <label>دورات المياه<input id="pBathrooms" type="number" min="0"></label>
+        <label>عمر العقار (سنة)<input id="pPropertyAge" type="number" min="0"></label>
+        <label>المواقف<input id="pParking" type="number" min="0"></label>
+        <label class="check-card"><input id="pElevator" type="checkbox"> يوجد مصعد</label>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <div class="form-section-title"><b>3. الوصف والمميزات</b><span>اكتب البيانات التي تساعد العميل على اتخاذ قرار التواصل</span></div>
+      <div class="form-grid">
+        <label class="full">الوصف التفصيلي<textarea id="pDescription" placeholder="اكتب وصفًا واضحًا ومهنيًا للعقار..."></textarea></label>
+        <label class="full">المميزات <span class="hint">افصل بين كل ميزة بفاصلة</span><input id="pFeatures" placeholder="مصعد، تكييف، مقابل حديقة، موقع مميز"></label>
+        <label class="check-card"><input id="pNegotiable" type="checkbox"> السعر قابل للتفاوض</label>
+        <label class="check-card"><input id="pFeatured" type="checkbox"> عرض مميز في الموقع</label>
+      </div>
+    </div>
+
+    <div class="form-section private-section">
+      <div class="form-section-title"><b>4. بيانات خاصة — لا تظهر للزوار</b><span>لإدارة التواصل مع المالك داخليًا</span></div>
+      <div class="form-grid">
+        <label>اسم المالك / جهة العرض<input id="pOwnerName"></label>
+        <label>رقم التواصل<input id="pOwnerPhone" inputmode="tel"></label>
+        <label class="full">ملاحظات داخلية<textarea id="pInternalNotes" placeholder="عمولة، مواعيد المعاينة، تعليمات خاصة..."></textarea></label>
+      </div>
+    </div>
+
+    <div class="form-section">
+      <div class="form-section-title"><b>5. صور العقار</b><span>يمكن رفع عدة صور دفعة واحدة</span></div>
+      <label class="upload-box">اختر صور العقار<input id="pImages" type="file" accept="image/*" multiple><span id="imageCount">لم يتم اختيار صور جديدة</span></label>
+    </div>
+
+    <div class="price-summary"><span>السعر للمتر التقريبي</span><b id="pricePerSqm">—</b></div>
+    <div class="modal-actions sticky-actions"><button type="button" id="cancelModal" class="btn">إلغاء</button><button type="button" id="saveDraftBtn" class="btn btn-soft">حفظ كمسودة</button><button class="btn btn-primary" type="submit">حفظ ونشر</button></div>
+    <small id="formStatus" class="form-status"></small>
   </form>
 </div>
 <script type="module" src="/admin/admin.js"></script>
