@@ -1,123 +1,92 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>مدار العقارية | MIDAR REAL ESTATE</title>
-  <meta name="description" content="مدار العقارية - وساطة وتسويق عقاري في بريدة والقصيم. أراضٍ، فلل، شاليهات وفرص استثمارية مختارة.">
-  <link rel="canonical" href="https://midarrealty.com/">
-  <meta name="robots" content="index,follow,max-image-preview:large">
-  <link rel="stylesheet" href="/assets/styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>مدار العقارية | MIDAR REAL ESTATE</title>
+<meta name="description" content="مدار العقارية - وساطة وتسويق عقاري في القصيم والرياض. أراضٍ، فلل، وحدات سكنية، عقارات تجارية وفرص استثمارية مختارة.">
+<link rel="canonical" href="https://midarrealty.com/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#071b2f">
+<link rel="stylesheet" href="/assets/v3.css?v=3">
 </head>
 <body>
-<header class="site-header">
-  <div class="container nav">
-    <a class="brand" href="/"><span class="brand-mark">M</span><span>مدار العقارية <b>| MIDAR</b></span></a>
-    <nav>
-      <a href="#offers">العروض</a>
-      <a href="#categories">التصنيفات</a>
-      <a href="#about">عن مدار</a>
-      <a href="#contact">تواصل</a>
+<header class="site-header" id="top">
+  <div class="container nav-wrap">
+    <a class="brand" href="#top" aria-label="مدار العقارية">
+      <svg class="brand-logo" viewBox="0 0 64 64" aria-hidden="true"><path d="M10 50V34l9-6v22M24 50V21l10-8v37M39 50V9l10 8v33M7 52c14-4 35-4 50 0" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="brand-copy"><strong>مدار العقارية</strong><small>MIDAR REAL ESTATE</small></span>
+    </a>
+    <nav class="main-nav" aria-label="القائمة الرئيسية">
+      <a href="#offers">العروض</a><a href="#regions">المناطق</a><a href="#services">خدماتنا</a><a href="#about">عن مدار</a><a href="#contact">تواصل معنا</a>
     </nav>
-    <a class="btn btn-primary" href="https://wa.me/966596598878" target="_blank" rel="noopener">واتساب</a>
+    <a class="wa-btn" href="https://wa.me/966596598878" target="_blank" rel="noopener">واتساب <span>0596598878</span></a>
   </div>
 </header>
 
 <main>
 <section class="hero">
-  <div class="container hero-grid">
-    <div>
-      <span class="eyebrow gold">مدار العقارية | MIDAR</span>
-      <h1>نصل بالفرصة<br>إلى وجهتها.</h1>
-      <p>نرتب الفرص العقارية ونقدمها باحترافية، من الأراضي والفلل إلى الشاليهات والفرص الاستثمارية في بريدة والقصيم.</p>
-      <div class="hero-actions">
-        <a class="btn btn-gold" href="#offers">تصفح العروض</a>
-        <a class="btn btn-ghost" href="#contact">أرسل طلبك العقاري</a>
-      </div>
-      <div class="stats-mini">
-        <span><b id="statPublished">—</b><small>عرض منشور</small></span>
-        <span><b id="statCities">—</b><small>مدينة / نطاق</small></span>
-        <span><b>0596598878</b><small>تواصل مباشر</small></span>
-      </div>
+  <div class="hero-overlay"></div>
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <span class="hero-kicker">MIDAR REAL ESTATE</span>
+      <h1>نصل بالفرصة<br><em>إلى وجهتها</em></h1>
+      <p>وساطة وتسويق عقاري في <b>القصيم والرياض</b>، بعروض حقيقية وبيانات واضحة وتواصل مباشر.</p>
+      <div class="hero-actions"><a class="btn gold" href="#offers">تصفح أحدث العروض</a><a class="btn glass" href="#contact">اعرض عقارك معنا</a></div>
+      <div class="trust-row"><span>◆ معلومات واضحة</span><span>◆ تغطية القصيم والرياض</span><span>◆ فرص استثمارية</span><span>◆ وساطة موثوقة</span></div>
     </div>
-    <div class="hero-card">
-      <div class="pulse"></div>
-      <span>فرصة الأسبوع</span>
-      <h3 id="featuredTitle">تحميل أحدث فرصة...</h3>
-      <p id="featuredMeta">—</p>
-      <a id="featuredLink" class="text-link" href="#offers">عرض التفاصيل ←</a>
+    <aside class="hero-feature" id="heroFeature"><span class="feature-label">فرصة مختارة</span><h3>جاري تحميل أحدث فرصة...</h3><p>—</p><a href="#offers">عرض التفاصيل ←</a></aside>
+  </div>
+</section>
+
+<section class="search-shell" aria-label="بحث العقارات">
+  <div class="container search-bar">
+    <div class="search-tabs"><button class="active" data-offer-filter="sale">للبيع</button><button data-offer-filter="rent">للإيجار</button><button data-offer-filter="all">جميع العقارات</button></div>
+    <div class="search-fields">
+      <label>المدينة<select id="cityFilter"><option value="all">كل المدن</option><option value="qassim">القصيم</option><option value="riyadh">الرياض</option></select></label>
+      <label>نوع العقار<select id="typeFilter"><option value="all">كل الأنواع</option><option value="land">أراضٍ</option><option value="villa">فلل</option><option value="residential">وحدات سكنية</option><option value="commercial">تجاري</option><option value="investment">استثماري</option><option value="chalet">شاليهات</option></select></label>
+      <label class="search-text">بحث<input id="textSearch" placeholder="الحي، المرجع، نوع العقار..."></label>
+      <button id="searchBtn" class="search-btn">بحث</button>
     </div>
   </div>
 </section>
 
-<section class="section" id="categories">
+<section class="section regions" id="regions">
   <div class="container">
-    <span class="eyebrow">التصنيفات</span>
-    <h2>اختر نوع العقار</h2>
-    <div class="category-grid">
-      <button data-filter="land" class="category-card"><span>▱</span><b>أراضٍ للبيع</b><small>سكنية وتجارية واستثمارية</small></button>
-      <button data-filter="villa" class="category-card"><span>⌂</span><b>فلل للبيع</b><small>فلل ومنازل مختارة</small></button>
-      <button data-filter="chalet" class="category-card"><span>⌂</span><b>شاليهات للبيع</b><small>شاليهات واستراحات</small></button>
-      <button data-filter="investment" class="category-card"><span>↗</span><b>فرص استثمارية</b><small>أصول وفرص مدرة للدخل</small></button>
+    <div class="section-title"><span>اختر نطاقك العقاري</span><h2>عقارات القصيم والرياض</h2><p>ادخل مباشرة إلى العروض المتاحة في المنطقة التي تهمك.</p></div>
+    <div class="region-grid">
+      <button class="region-card qassim" data-region="qassim"><div><span>عقارات القصيم</span><strong>فرص متنوعة في بريدة والقصيم</strong><small>استعرض الآن ←</small></div></button>
+      <button class="region-card riyadh" data-region="riyadh"><div><span>عقارات الرياض</span><strong>فرص استثمارية ومواقع مميزة</strong><small>استعرض الآن ←</small></div></button>
     </div>
   </div>
 </section>
 
-<section class="section section-soft" id="offers">
+<section class="section offers" id="offers">
   <div class="container">
-    <div class="section-head">
-      <div><span class="eyebrow">العروض الحالية</span><h2>أحدث فرص مدار العقارية</h2></div>
-      <div class="filters">
-        <button class="chip active" data-filter="all">الكل</button>
-        <button class="chip" data-filter="land">أراضٍ</button>
-        <button class="chip" data-filter="villa">فلل</button>
-        <button class="chip" data-filter="chalet">شاليهات</button>
-      </div>
-    </div>
-    <div id="propertiesGrid" class="properties-grid">
-      <div class="loading-card">جاري تحميل العروض...</div>
-    </div>
+    <div class="offers-head"><div class="section-title align-start"><span>العروض الحالية</span><h2>أحدث عروض مدار العقارية</h2><p>عروض فعلية، معلومات واضحة، وتواصل مباشر مع مدار.</p></div><div class="chips"><button class="active" data-type="all">الكل</button><button data-type="land">أراضٍ</button><button data-type="villa">فلل</button><button data-type="residential">وحدات</button><button data-type="commercial">تجاري</button><button data-type="investment">استثماري</button></div></div>
+    <div id="propertiesGrid" class="property-grid"><div class="loading">جاري تحميل العروض...</div></div>
   </div>
 </section>
 
-<section class="section" id="about">
-  <div class="container about-grid">
-    <div>
-      <span class="eyebrow">عن مدار</span>
-      <h2>واجهة عقارية منظمة، وليست مجرد إعلان.</h2>
-      <p>نعرض كل فرصة بمرجع مستقل، بيانات واضحة، صور، موقع، وسيلة تواصل مباشرة، مع متابعة منظمة للاستفسارات والفرص.</p>
-    </div>
-    <div class="about-points">
-      <div><b>01</b><span>عرض واضح ومهني لكل عقار</span></div>
-      <div><b>02</b><span>مرجع MIDAR مستقل لكل فرصة</span></div>
-      <div><b>03</b><span>تواصل مباشر ومتابعة للعملاء</span></div>
-    </div>
-  </div>
+<section class="section services" id="services">
+  <div class="container"><div class="section-title light"><span>خدمات مدار</span><h2>خدمات عقارية بمنهج واضح</h2></div><div class="service-grid">
+    <article><i>⌂</i><h3>التسويق العقاري</h3><p>إبراز العقار وعرضه بصورة احترافية للعملاء المهتمين.</p></article>
+    <article><i>🤝</i><h3>الوساطة العقارية</h3><p>متابعة منظمة من الاستفسار وحتى إتمام الصفقة.</p></article>
+    <article><i>↗</i><h3>الفرص الاستثمارية</h3><p>عرض فرص مدروسة ببيانات دخل ومواصفات واضحة.</p></article>
+    <article><i>◇</i><h3>البحث عن عقار</h3><p>استقبال طلبك وتحديد الخيارات الأنسب في القصيم والرياض.</p></article>
+  </div></div>
 </section>
 
-<section class="section contact-section" id="contact">
-  <div class="container contact-box">
-    <div>
-      <span class="eyebrow gold">تواصل معنا</span>
-      <h2>هل لديك عقار للبيع أو تبحث عن فرصة؟</h2>
-      <p>أرسل بياناتك وسيتم تسجيل طلبك في لوحة متابعة مدار.</p>
-    </div>
-    <form id="leadForm" class="lead-form">
-      <input id="leadName" placeholder="الاسم" required>
-      <input id="leadPhone" placeholder="رقم الجوال" required>
-      <select id="leadType"><option value="buyer">أبحث عن عقار</option><option value="seller">لدي عقار للبيع</option><option value="investor">مستثمر</option></select>
-      <textarea id="leadMessage" placeholder="اكتب طلبك أو تفاصيل العقار"></textarea>
-      <button class="btn btn-gold" type="submit">إرسال الطلب</button>
-      <small id="leadStatus"></small>
-    </form>
-  </div>
-</section>
+<section class="section about" id="about"><div class="container about-grid"><div><span class="eyebrow">عن مدار</span><h2>واجهة عقارية حقيقية، وليست مجرد إعلان.</h2><p>نبني لكل فرصة عرضًا منظمًا بمرجع مستقل وصور وموقع وبيانات واضحة، مع متابعة الاستفسارات من خلال لوحة تحكم مدار.</p></div><div class="about-list"><div><b>01</b><span>عرض احترافي للعقار</span></div><div><b>02</b><span>تواصل مباشر وسريع</span></div><div><b>03</b><span>تنظيم حسب المنطقة والنوع</span></div><div><b>04</b><span>متابعة حالة العرض</span></div></div></div></section>
+
+<section class="cta"><div class="container cta-inner"><div><span>لديك عقار؟</span><h2>دعنا نساعدك في تسويقه بأفضل صورة.</h2></div><a class="btn dark" href="https://wa.me/966596598878?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D9%84%D8%AF%D9%8A%20%D8%B9%D9%82%D8%A7%D8%B1%20%D9%88%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%AA%D8%B3%D9%88%D9%8A%D9%82%D9%87%20%D9%85%D8%B9%20%D9%85%D8%AF%D8%A7%D8%B1" target="_blank" rel="noopener">تواصل معنا الآن</a></div></section>
+
+<section class="section contact" id="contact"><div class="container contact-grid"><div><span class="eyebrow gold-text">تواصل معنا</span><h2>تبحث عن عقار أو لديك عرض؟</h2><p>أرسل طلبك وسيتم تسجيله في لوحة متابعة مدار للتواصل معك.</p><div class="social-line"><b>0596598878</b><span>سناب: midar020</span><span>تيك توك: midar.020</span></div></div><form id="leadForm"><input id="leadName" placeholder="الاسم" required><input id="leadPhone" placeholder="رقم الجوال" required><select id="leadType"><option value="buyer">أبحث عن عقار</option><option value="seller">لدي عقار للبيع</option><option value="investor">مستثمر</option></select><textarea id="leadMessage" placeholder="اكتب طلبك أو تفاصيل العقار"></textarea><button class="btn gold" type="submit">إرسال الطلب</button><small id="leadStatus"></small></form></div></section>
 </main>
 
-<footer>
-  <div class="container footer-row"><span>مدار العقارية | MIDAR REAL ESTATE</span><span>0596598878</span><span>نصل بالفرصة إلى وجهتها.</span></div>
-</footer>
+<footer><div class="container footer-main"><div class="footer-brand"><svg viewBox="0 0 64 64"><path d="M10 50V34l9-6v22M24 50V21l10-8v37M39 50V9l10 8v33M7 52c14-4 35-4 50 0" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg><div><strong>مدار العقارية</strong><small>MIDAR REAL ESTATE</small></div></div><div class="footer-links"><a href="#offers">العروض</a><a href="#regions">المناطق</a><a href="#about">عن مدار</a><a href="#contact">تواصل</a></div><div class="footer-social"><span>0596598878</span><span>Snapchat: midar020</span><span>TikTok: midar.020</span></div></div><div class="container footer-bottom"><span>© 2026 مدار العقارية</span><span>نصل بالفرصة إلى وجهتها</span></div></footer>
 
-<script type="module" src="/assets/app.js"></script>
+<div id="propertyModal" class="property-modal" aria-hidden="true"><div class="modal-backdrop" data-close-modal></div><div class="property-modal-card"><button class="modal-close" data-close-modal>×</button><div id="modalContent"></div></div></div>
+<script type="module" src="/assets/v3.js?v=3"></script>
 </body>
 </html>
